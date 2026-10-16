@@ -1,0 +1,18 @@
+{
+  "name": "gold-loan-portal",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "concurrently -n api,web -c green,cyan \"npm run dev -w @goldloan/api\" \"npm run dev -w @goldloan/web\"",
+    "db:generate": "npm run db:generate -w @goldloan/api",
+    "db:migrate": "npm run db:migrate -w @goldloan/api",
+    "db:seed": "npm run db:seed -w @goldloan/api",
+    "typecheck": "npm run typecheck -ws --if-present",
+    "test": "npm run test -ws --if-present"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}

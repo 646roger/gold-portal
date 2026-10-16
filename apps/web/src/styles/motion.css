@@ -1,0 +1,192 @@
+/* =========================================================================
+   Motion + polish layer. Loaded after app.css. Everything here is disabled by the
+   prefers-reduced-motion rule in app.css (animations and transitions are removed).
+   ========================================================================= */
+html { scroll-behavior: smooth; }
+body {
+  background:
+    radial-gradient(1100px 480px at 88% -8%, rgba(197, 138, 27, 0.16), transparent 62%),
+    radial-gradient(900px 520px at -8% 4%, rgba(23, 107, 77, 0.12), transparent 58%),
+    var(--ivory);
+  background-attachment: fixed;
+}
+
+/* ---------- keyframes ---------- */
+@keyframes fadeIn { from { opacity: 0; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } }
+@keyframes slideFwd { from { opacity: 0; transform: translateX(28px); } }
+@keyframes slideBack { from { opacity: 0; transform: translateX(-28px); } }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-100%); } }
+@keyframes fromLeft { from { opacity: 0; transform: translateX(-18px) scale(0.97); } }
+@keyframes fromRight { from { opacity: 0; transform: translateX(18px) scale(0.97); } }
+@keyframes pop { 0% { transform: scale(0.85); } 60% { transform: scale(1.08); } 100% { transform: scale(1); } }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-6px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(2px); } }
+@keyframes errIn { from { opacity: 0; transform: translateY(-4px); } }
+@keyframes grow { from { transform: scaleX(0); } }
+@keyframes bounceDot { 0%, 80%, 100% { transform: translateY(0); opacity: 0.45; } 40% { transform: translateY(-5px); opacity: 1; } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes shine { 0% { transform: translateX(-140%) skewX(-20deg); } 60%, 100% { transform: translateX(320%) skewX(-20deg); } }
+@keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(23, 107, 77, 0.35); } 100% { box-shadow: 0 0 0 14px rgba(23, 107, 77, 0); } }
+@keyframes selectPulse { 0% { transform: scale(0.985); } 55% { transform: scale(1.012); } 100% { transform: scale(1); } }
+@keyframes flash { 0% { background-color: rgba(217, 169, 58, 0.35); } 100% { background-color: transparent; } }
+@keyframes fall { 0% { opacity: 0; transform: translate(0, -10px) rotate(0); } 15% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--x), 140px) rotate(var(--r)); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes underline { from { transform: scaleX(0); } }
+
+/* ---------- page + step transitions ---------- */
+.page { animation: fadeUp var(--dur-3) var(--ease-out) both; }
+.panel--enter { animation: slideFwd 0.4s var(--ease-out) both; }
+.panel--enter.panel--back { animation-name: slideBack; }
+.stagger > * { animation: fadeUp var(--dur-3) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 45ms); }
+.stagger > :nth-child(1) { --i: 1; }
+.stagger > :nth-child(2) { --i: 2; }
+.stagger > :nth-child(3) { --i: 3; }
+.stagger > :nth-child(4) { --i: 4; }
+.stagger > :nth-child(5) { --i: 5; }
+.stagger > :nth-child(6) { --i: 6; }
+.stagger > :nth-child(7) { --i: 7; }
+.stagger > :nth-child(8) { --i: 8; }
+.stagger > :nth-child(9) { --i: 9; }
+.stagger > :nth-child(10) { --i: 10; }
+.stagger > :nth-child(11) { --i: 11; }
+.stagger > :nth-child(12) { --i: 12; }
+.stagger > :nth-child(13) { --i: 13; }
+.stagger > :nth-child(14) { --i: 14; }
+.stagger > :nth-child(15) { --i: 15; }
+.stagger > :nth-child(16) { --i: 16; }
+
+/* ---------- shell ---------- */
+.topbar { background: linear-gradient(110deg, #0d3f30, var(--green-700) 55%, #14604a); box-shadow: 0 2px 14px rgba(16, 76, 57, 0.28); animation: slideDown 0.5s var(--ease-out) both; position: sticky; top: 0; z-index: 5; }
+.brand__ingot { background: var(--gold-grad); position: relative; overflow: hidden; animation: float 3.6s ease-in-out infinite; }
+.brand__ingot::after { content: ''; position: absolute; inset: 0; width: 40%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent); animation: shine 3.2s ease-in-out infinite; }
+.brand { transition: transform var(--dur-2) var(--ease-spring); }
+.brand:hover { transform: scale(1.04); }
+.nav a { position: relative; border-bottom: 0; border-radius: var(--r-2); transition: color var(--dur-2), background var(--dur-2); }
+.nav a::after { content: ''; position: absolute; left: var(--s-3); right: var(--s-3); bottom: 2px; height: 2px; background: var(--ochre-rule); transform: scaleX(0); transform-origin: left; transition: transform 0.35s var(--ease-out); }
+.nav a:hover { background: rgba(255, 255, 255, 0.08); }
+.nav a:hover::after, .nav a[aria-current='page']::after { transform: scaleX(1); }
+.nav a[aria-current='page'] { border-bottom-color: transparent; }
+.intro h1 { position: relative; display: inline-block; }
+.intro h1::after { content: ''; display: block; height: 4px; margin-top: var(--s-2); width: 56px; background: var(--gold-grad); border-radius: 2px; transform-origin: left; animation: underline 0.8s 0.25s var(--ease-out) both; }
+.intro p { animation: fadeUp var(--dur-3) 0.12s var(--ease-out) both; }
+
+/* ---------- stepper ---------- */
+.steps li::before { transform-origin: left; transition: background var(--dur-2); }
+.steps li[aria-current='step']::before, .steps li.done::before { animation: grow 0.6s var(--ease-out) both; }
+.steps li { transition: color var(--dur-2); }
+.steps .n { display: inline-grid; place-items: center; min-width: 1.6em; height: 1.6em; border-radius: 50%; transition: background var(--dur-2), color var(--dur-2), transform var(--dur-2) var(--ease-spring); }
+.steps li[aria-current='step'] .n { background: var(--ochre-rule); color: #fff; animation: pop 0.45s var(--ease-spring); }
+.steps li.done .n { background: var(--green-600); color: #fff; animation: pop 0.45s var(--ease-spring); }
+.steps .n svg { width: 0.95em; height: 0.95em; }
+
+/* ---------- surfaces ---------- */
+.panel { box-shadow: var(--shadow-1); transition: box-shadow var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-out); }
+.slip { box-shadow: var(--shadow-2); }
+.slip::before { background: var(--gold-grad); }
+.notice { animation: fadeUp 0.35s var(--ease-out) both; }
+.notice--err { animation: fadeUp 0.35s var(--ease-out) both, shake 0.45s 0.1s both; }
+
+/* ---------- inputs ---------- */
+.input { transition: border-color var(--dur-2), box-shadow var(--dur-2), background var(--dur-2), transform var(--dur-2) var(--ease-out); }
+.input:hover { border-color: #9aa59c; }
+.input:focus-visible { border-color: var(--green-600); box-shadow: 0 0 0 4px rgba(23, 107, 77, 0.16); transform: translateY(-1px); }
+.input[aria-invalid='true'] { animation: shake 0.4s both; }
+.input[aria-invalid='true']:focus-visible { box-shadow: 0 0 0 4px rgba(163, 38, 42, 0.16); }
+.field label { transition: color var(--dur-2); }
+.field:focus-within label { color: var(--green-700); }
+.err:not(:empty) { animation: errIn 0.25s var(--ease-out) both; }
+.input-affix .affix { transition: background var(--dur-2), color var(--dur-2); }
+.input-affix:focus-within .affix { background: var(--green-050); color: var(--green-700); }
+.chip { transition: transform var(--dur-1) var(--ease-out), background var(--dur-2), border-color var(--dur-2), color var(--dur-2), box-shadow var(--dur-2); }
+.chip:hover:not([aria-pressed='true']) { transform: translateY(-2px); box-shadow: var(--shadow-1); }
+.chip:active { transform: scale(0.93); }
+.chip[aria-pressed='true'] { animation: pop 0.35s var(--ease-spring); }
+
+/* ---------- buttons ---------- */
+.btn { position: relative; overflow: hidden; transition: transform var(--dur-1) var(--ease-out), box-shadow var(--dur-2), background var(--dur-2), border-color var(--dur-2), color var(--dur-2); }
+.btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 18px -6px rgba(16, 76, 57, 0.45); }
+.btn:active:not(:disabled) { transform: translateY(0) scale(0.96); box-shadow: none; }
+.btn:not(.btn--quiet):not(:disabled)::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent); transform: translateX(-140%) skewX(-20deg); }
+.btn:not(.btn--quiet):not(:disabled):hover::after { animation: shine 0.9s var(--ease-out); }
+.btn--quiet:hover:not(:disabled) { box-shadow: var(--shadow-1); }
+.btn--loading { pointer-events: none; }
+.btn--ready:not(:disabled) { animation: pulseRing 1.6s 0.2s 2; }
+.spinner--light { border-color: rgba(255, 255, 255, 0.35); border-top-color: #fff; }
+
+/* ---------- valuation slip ---------- */
+.slip__body[aria-busy='true'] .val { opacity: 0.55; }
+.ledger li { animation: fadeIn 0.4s both; }
+.slip__plans .row { animation: fadeUp 0.45s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms); transition: background var(--dur-2), padding var(--dur-2) var(--ease-out); border-radius: var(--r-1); }
+.slip__plans .row:hover { background: var(--green-050); padding-left: var(--s-2); padding-right: var(--s-2); }
+.slip__plans .sel { animation: pop 0.4s var(--ease-spring); }
+.slip__total .big { transition: color var(--dur-2); }
+.skeleton--val { display: inline-block; width: 5.5em; height: 1em; vertical-align: middle; }
+.skeleton--big { width: 9em; height: 1.6em; margin-top: var(--s-1); }
+.slip__status::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--green-600); margin-right: 6px; animation: pulseRing 1.8s infinite; vertical-align: 1px; }
+
+/* ---------- plan cards ---------- */
+.plan { transition: transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2), border-color var(--dur-2), background var(--dur-2); animation: fadeUp 0.5s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 90ms); }
+.plan:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); }
+.plan:active { transform: scale(0.985); }
+.plan:has(input:checked) { animation: selectPulse 0.45s var(--ease-spring); }
+.plan input { appearance: none; -webkit-appearance: none; border: 2px solid var(--border-strong); border-radius: 50%; background: #fff; display: grid; place-content: center; transition: border-color var(--dur-2), background var(--dur-2); }
+.plan input::after { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--green-700); transform: scale(0); transition: transform 0.25s var(--ease-spring); }
+.plan input:checked { border-color: var(--green-700); }
+.plan input:checked::after { transform: scale(1); }
+.plan__amt { transition: transform var(--dur-2) var(--ease-spring); transform-origin: right center; }
+.plan:has(input:checked) .plan__amt { transform: scale(1.08); }
+
+/* ---------- review + success ---------- */
+.dl > div { transition: background var(--dur-2); }
+.dl > div:hover { background: rgba(233, 241, 236, 0.55); }
+.dl .em { animation: flash 1.4s 0.6s both; }
+.confirm { transition: border-color var(--dur-2), background var(--dur-2), box-shadow var(--dur-2); }
+.confirm:has(input:checked) { border-color: var(--green-600); background: var(--green-050); box-shadow: inset 4px 0 0 var(--green-600); }
+.confirm input { appearance: none; -webkit-appearance: none; border: 2px solid var(--border-strong); border-radius: 6px; background: #fff; display: grid; place-content: center; cursor: pointer; transition: background var(--dur-2), border-color var(--dur-2), transform var(--dur-1); }
+.confirm input::after { content: ''; width: 11px; height: 6px; margin-top: -2px; border: solid #fff; border-width: 0 0 3px 3px; transform: rotate(-45deg) scale(0); transition: transform 0.25s var(--ease-spring); }
+.confirm input:checked { background: var(--green-700); border-color: var(--green-700); }
+.confirm input:checked::after { transform: rotate(-45deg) scale(1); }
+.confirm input:active { transform: scale(0.88); }
+
+.success { position: relative; overflow: hidden; text-align: center; max-width: 560px; margin: 0 auto; animation: fadeUp 0.6s var(--ease-out) both; }
+.success .dl { text-align: left; }
+.tick { width: 84px; height: 84px; display: block; margin: 0 auto var(--s-4); }
+.tick__c { stroke: var(--green-600); stroke-width: 3; stroke-dasharray: 151; stroke-dashoffset: 151; animation: draw 0.7s var(--ease-inout) 0.1s forwards; }
+.tick__p { stroke: var(--green-700); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 40; stroke-dashoffset: 40; animation: draw 0.45s var(--ease-out) 0.75s forwards; }
+.tick { animation: pop 0.5s 0.05s var(--ease-spring) both; }
+.appid { display: inline-block; padding: var(--s-2) var(--s-4); border: 1px dashed var(--ochre-rule); border-radius: var(--r-2); background: #fbf3e2; animation: pop 0.6s 0.9s var(--ease-spring) both; }
+.spark { position: absolute; top: 0; width: 8px; height: 12px; border-radius: 2px; background: var(--gold-grad); opacity: 0; animation: fall 2.2s var(--ease-out) forwards; animation-delay: var(--d); left: var(--l); pointer-events: none; }
+.spark:nth-child(3n) { background: var(--green-600); }
+.spark:nth-child(4n) { background: #e8c566; width: 6px; height: 6px; border-radius: 50%; }
+
+/* ---------- assistant ---------- */
+.chat { box-shadow: var(--shadow-2); animation: fadeUp 0.5s var(--ease-out) both; }
+.msg { animation: fromLeft 0.4s var(--ease-out) both; }
+.msg--user { animation-name: fromRight; }
+.msg--error .msg__bubble { animation: shake 0.45s 0.15s both; }
+.msg--user .msg__bubble { background: linear-gradient(135deg, var(--green-600), var(--green-700)); box-shadow: 0 6px 14px -8px rgba(16, 76, 57, 0.6); }
+.block { animation: fadeUp 0.5s 0.1s var(--ease-out) both; transition: box-shadow var(--dur-2), transform var(--dur-2) var(--ease-out); }
+.block:hover { box-shadow: var(--shadow-1); transform: translateY(-1px); }
+.block .appid { font-size: var(--t-lg); animation-delay: 0.25s; }
+.block[role='status'] { animation: fadeUp 0.5s var(--ease-out) both, pulseRing 1.4s 0.5s 2; }
+.typing { display: inline-flex; gap: 4px; align-items: center; padding: 0 2px; }
+.typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--green-600); display: block; animation: bounceDot 1.1s infinite ease-in-out; }
+.typing i:nth-child(2) { animation-delay: 0.15s; }
+.typing i:nth-child(3) { animation-delay: 0.3s; }
+.working { animation: fadeIn 0.3s both; }
+.chat__form .input:focus-visible { transform: none; }
+.mode { transition: background var(--dur-2); animation: pop 0.5s var(--ease-spring) both; }
+
+/* ---------- admin ---------- */
+.tablewrap { position: relative; box-shadow: var(--shadow-1); animation: fadeUp 0.5s var(--ease-out) both; }
+.tablewrap > .progress { position: absolute; top: 0; left: 0; right: 0; z-index: 2; }
+.tablewrap tbody { transition: opacity var(--dur-3); }
+.tablewrap[aria-busy='true'] tbody { opacity: 0.55; }
+tbody tr { transition: background var(--dur-2); }
+tbody tr:hover { background: var(--green-050); }
+tbody tr.row-in { animation: fadeUp 0.45s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 35ms); }
+.status { display: inline-block; animation: pop 0.45s var(--ease-spring) both; animation-delay: calc(var(--i, 0) * 35ms + 150ms); }
+.empty { animation: fadeUp 0.5s var(--ease-out) both; }
+.empty::before { content: '◇'; display: block; font-size: 2rem; color: var(--ochre-rule); margin-bottom: var(--s-2); animation: float 3s ease-in-out infinite; }
+.toolbar { animation: fadeUp 0.45s var(--ease-out) both; }
+select.input { cursor: pointer; }
