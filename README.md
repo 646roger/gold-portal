@@ -1,3 +1,4 @@
+
 # Kanak — Gold Loan Intake Portal (with AI loan assistant)
 
 A monorepo with a guided application form, a tool-calling AI assistant and an admin leads view. **Both borrower interfaces use the same backend services** (quotation, validation, submission), so an identical input yields an identical quotation whether it comes from the form or the assistant.
@@ -155,3 +156,5 @@ Real authentication/authorisation (users, roles, audit trail) for admin; per-use
 - The `viewport`/sticky mobile bar, chip buttons and stacked admin table are untested visually.
 - Chat session lock is in-process (one API instance).
 - Duplicate window is measured from the server clock at submission; rows are never deleted by the app.
+# gold-portal
+
